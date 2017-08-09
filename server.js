@@ -1,4 +1,5 @@
 'use strict'
+require('dotenv').config()
 
 //first we import our dependencies…
 var express = require('express');
@@ -38,8 +39,21 @@ router.get('/', function(req, res) {
 
 //Use our router configuration when we call /api
 app.use('/api', router);
-debugger;
+
 //starts the server and listens for requests
 app.listen(port, function() {
  console.log(`api running on port ${port}`);
+});
+
+//db configuration
+// var db = require('db')
+// db.connect({
+//   host: process.env.DB_HOST,
+//   username: process.env.DB_USER,
+//   password: process.env.DB_PASS
+// })
+
+// mongoose.connect('mongodb://' + process.env.DB_USER+ ':' + process.env.DB_PASS + '@ds149511.mlab.com:49511/merntutorial');
+var promise = mongoose.connect('mongodb://' + process.env.DB_USER+ ':' + process.env.DB_PASS + '@ds149511.mlab.com:49511/merntutorial', {
+  useMongoClient: true
 });
